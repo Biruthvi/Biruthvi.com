@@ -1,82 +1,65 @@
-# Firstweb.com
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Biru web</title>
+    <title>Simple To-Do List App</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-
-        header {
-            background-color: #3498db;
-            color: #fff;
             text-align: center;
-            padding: 20px;
         }
 
-        nav {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
+        h1 {
+            color: #3498db;
         }
 
-        nav ul {
+        #app {
+            width: 300px;
+            margin: 20px auto;
+            text-align: left;
+        }
+
+        ul {
             list-style: none;
             padding: 0;
         }
 
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-
-        main {
-            margin: 20px;
-            padding: 20px;
-            background-color: #fff;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #f0f0f0;
+            padding: 5px 10px;
+            margin: 5px 0;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Web Page</h1>
-    </header>
+    <h1>Simple To-Do List App</h1>
+    <div id="app">
+        <input type="text" id="task" placeholder="Enter a task">
+        <button onclick="addTask()">Add Task</button>
+        <ul id="task-list"></ul>
+    </div>
 
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById('task');
+            const taskText = taskInput.value.trim();
+            if (taskText === '') return;
 
-    <main>
-        <h2>About Me</h2>
-        <p>This is a sample web page. You can add content about yourself or any topic you like.</p>
+            const taskList = document.getElementById('task-list');
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<span>${taskText}</span><button onclick="removeTask(this)">Remove</button>`;
+            taskList.appendChild(listItem);
 
-        <h2>Services</h2>
-        <ul>
-            <li>Web Design</li>
-            <li>Graphic Design</li>
-            <li>Content Writing</li>
-        </ul>
-    </main>
+            taskInput.value = '';
+        }
 
-    <footer>
-        <p>&copy; 2023 Biruthvi</p>
-    </footer>
+        function removeTask(button) {
+            const taskList = document.getElementById('task-list');
+            const listItem = button.parentNode;
+            taskList.removeChild(listItem);
+        }
+    </script>
 </body>
 </html>
